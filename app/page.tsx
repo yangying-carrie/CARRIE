@@ -14,7 +14,7 @@ export default function HomePage() {
   const handleTranslate = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('/api/translate', { text, fromLang, toLang });
+      const res = await axios.post('https://o9yixkuw4d.execute-api.us-east-1.amazonaws.com/prod/translate', { text, fromLang, toLang });
       setResult(res.data.translation);
     } catch (error) {
       setResult('翻译出错，请稍后再试。');
