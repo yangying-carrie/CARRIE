@@ -17,8 +17,9 @@ export default function HomePage() {
         fromLang,
         toLang,
       });
-      setResult(res.data.translation);
+      setResult(res.data.translation || '翻译成功但无结果');
     } catch (error) {
+      console.error('Error:', error);
       setResult('翻译出错，请稍后再试。');
     } finally {
       setLoading(false);
@@ -46,4 +47,18 @@ export default function HomePage() {
         <select value={toLang} onChange={(e) => setToLang(e.target.value)}>
           <option>英文</option>
           <option>中文</option>
-          <option>日文</option
+          <option>日文</option>
+          <option>韩文</option>
+        </select>
+      </div>
+      <button onClick={handleTranslate} disabled={loading} style={{ padding: '10px 20px' }}>
+        {loading ? '翻译中...' : '开始翻译'}
+      </button>
+      {result && (
+        <div style={{ marginTop: '24px', padding: '12px', border: '1px solid #ccc', whiteSpace: 'pre-wrap' }}>
+          {result}
+        </div>
+      )}
+    </main>
+  );
+}
